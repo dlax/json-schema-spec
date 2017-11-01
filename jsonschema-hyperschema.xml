@@ -354,6 +354,49 @@
                     resolved for use with "anchor" than when being resolved for use with "href",
                     which is explained in detail in the URI Templating section.
                 </t>
+                <figure>
+                    <preamble>
+                        An example of a JSON schema using "base":
+                    </preamble>
+                    <artwork>
+<![CDATA[{
+    "base": "/object/{id}",
+    "links": [
+        {
+            "rel": "self",
+            "href": ""
+        },
+        {
+            "rel": "next",
+            "href": "{nextId}"
+        }
+    ]
+}]]>
+                    </artwork>
+                </figure>
+                <figure>
+                    <preamble>
+                        along with the following JSON instance:
+                    </preamble>
+                    <artwork>
+<![CDATA[{
+    "id": 41,
+    "nextId": 42
+}]]>
+                    </artwork>
+                </figure>
+                <t>
+                    If the document URI is &lt;http://example.com/?id=41&gt;, then the new URI base
+                    becomes &lt;http://example.com/object/41&gt;
+                </t>
+                <t>
+                    Resolving the two Link Description Objects against this URI base creates two
+                    links exactly equivalent to these absolute-form HTTP Link headers:
+                    <list style="symbols">
+                        <t>Link: &lt;http://example.com/object/41&gt;;rel=self</t>
+                        <t>Link: &lt;http://example.com/object/42&gt;;rel=next</t>
+                    </list>
+                </t>
             </section>
 
             <section title="links">
