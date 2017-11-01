@@ -244,6 +244,51 @@
                     can be assumed.
                 </t>
             </section>
+            <section title="Example of JSON Hyper-Schema">
+                <figure>
+                    <preamble>
+                        Here is an example JSON Hyper-Schema:
+                    </preamble>
+                    <artwork>
+<![CDATA[{
+    "title": "Written Article",
+    "type": "object",
+    "properties": {
+        "id": {
+            "title": "Article Identifier",
+            "type": "number",
+            "readOnly": true
+        },
+        "title": {
+            "title": "Article Title",
+            "type": "string"
+        },
+        "authorId": {
+            "type": "integer"
+        }
+    },
+    "required" : ["id", "title"],
+    "links": [
+        {
+            "rel": "self",
+            "href": "/article{?id}"
+        },
+        {
+            "rel": "author",
+            "href": "/user?id={authorId}",
+            "hrefRequired": ["authorId"]
+        }
+    ]
+}]]>
+                    </artwork>
+                    <postamble>
+                        This example schema defines the properties of the instance as well as link
+                        relations for the instance, with URIs incorporating values from the
+                        instance.
+                    </postamble>
+                </figure>
+            </section>
+
         </section>
 
         <section title="Meta-schemas and output schema">
